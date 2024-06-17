@@ -1,5 +1,4 @@
 /*
- *
 Copyright 2019 @foostan
 Copyright 2020 Drashna Jaelre <@drashna>
 
