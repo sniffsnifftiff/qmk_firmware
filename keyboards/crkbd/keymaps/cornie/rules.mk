@@ -1,4 +1,5 @@
 TAP_DANCE_ENABLE = yes
+OLED_TIMEOUT = 0
 
 VIA_ENABLE = yes
 

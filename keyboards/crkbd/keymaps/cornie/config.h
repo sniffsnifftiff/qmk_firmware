@@ -23,8 +23,15 @@
 
 #define SPLIT_WPM_ENABLE
 
-// graphics ----
+// INFO: graphics ----LEFT----
 #define INCLUDE_LAYERS
-#define INCLUDE_LOGO
-#define INCLUDE_CAT
+
+#define INCLUDE_LOGO // either logo or luna
+// #define INCLUDE_LUNA //FIX: glitching when oled goes to sleep
+
+// INFO: graphics ----RIGHT---- pick one only
+#define INCLUDE_ARASAKA
+// #define INCLUDE_CAT
+// #define INCLUDE_OCEAN //FIX: glitching when oled goes to sleep
+
 

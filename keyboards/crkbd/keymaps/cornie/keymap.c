@@ -12,6 +12,18 @@
 #   include "./animation/bongo.h"
 #endif
 
+#ifdef INCLUDE_OCEAN
+#   include "./animation/ocean_dream.c"
+#endif
+
+#ifdef INCLUDE_ARASAKA
+#   include "./animation/arasaka.h"
+#endif
+
+#ifdef INCLUDE_LUNA
+#   include "./animation/luna.c"
+#endif
+
 enum layers {
     _BASE,
     _FIRST,
@@ -44,6 +56,30 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             } else {
                 unregister_code(KC_LSFT);
             }
+            break;
+        case KC_LCTL:
+        case KC_RCTL:
+#ifdef INCLUDE_OCEAN
+            is_calm = (record->event.pressed) ? true : false;
+#endif
+
+#ifdef INCLUDE_LUNA
+            if (record->event.pressed) {
+              isSneaking = true;
+            } else {
+              isSneaking = false;
+            }
+#endif
+            break;
+        case KC_SPC:
+#ifdef INCLUDE_LUNA
+            if (record->event.pressed) {
+              isJumping = true;
+              showedJump = false;
+            } else {
+              isJumping = false;
+            }
+#endif
             break;
     }
     return true;
@@ -104,15 +140,22 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
     if (is_keyboard_master()) {
         return OLED_ROTATION_270;
     } else {
-        return OLED_ROTATION_180;
+#ifdef INCLUDE_ARASAKA
+    return OLED_ROTATION_270;
+#elif defined(INCLUDE_OCEAN)
+    return OLED_ROTATION_270;
+#else
+    return OLED_ROTATION_180;
+#endif
     }
     return rotation;
 }
 
 bool oled_task_user(){
+    oled_set_brightness(0);
 
     if (is_keyboard_master()) {
-        oled_clear();
+        // oled_clear();
 
 #   ifdef INCLUDE_LAYERS
         switch (get_highest_layer(layer_state)) {
@@ -136,6 +179,12 @@ bool oled_task_user(){
         oled_write_raw_P(corne_logo, sizeof(corne_logo));
 #endif
 
+#ifdef INCLUDE_LUNA
+
+        led_usb_state = host_keyboard_led_state();
+        render_luna(0, 13);
+#endif
+
         // Display LED status
         // led_t led_state = host_keyboard_led_state();
         // oled_write_P(led_state.num_lock ? PSTR("NUM ") : PSTR("    "), false);
@@ -145,6 +194,14 @@ bool oled_task_user(){
 
 #   ifdef INCLUDE_CAT
         draw_bongo(false);
+#   endif
+
+#   ifdef INCLUDE_OCEAN
+        render_stars();
+#   endif
+
+#   ifdef INCLUDE_ARASAKA
+        arasaka_draw();
 #   endif
 
     }
