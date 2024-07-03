@@ -1,6 +1,16 @@
 #include QMK_KEYBOARD_H
 
-#include "rgblight.h"
+#ifdef INCLUDE_LAYERS
+#   include "./animation/layers.h"
+#endif
+
+#ifdef INCLUDE_LOGO
+#   include "./animation/corne_logo.h"
+#endif
+
+#ifdef INCLUDE_CAT
+#   include "./animation/bongo.h"
+#endif
 
 enum layers {
     _BASE,
@@ -104,7 +114,7 @@ bool oled_task_user(){
     if (is_keyboard_master()) {
         oled_clear();
 
-#   ifdef LAYERS_ENABLE
+#   ifdef INCLUDE_LAYERS
         switch (get_highest_layer(layer_state)) {
             case _BASE:
                 oled_write_raw_P(qwerty_img, sizeof(qwerty_img));
@@ -121,10 +131,10 @@ bool oled_task_user(){
         }
 #   endif
 
-#   ifdef CORNE_LOGO_ENABLE
+#ifdef INCLUDE_LOGO
         oled_set_cursor(0, 12);
         oled_write_raw_P(corne_logo, sizeof(corne_logo));
-#   endif
+#endif
 
         // Display LED status
         // led_t led_state = host_keyboard_led_state();
@@ -133,8 +143,8 @@ bool oled_task_user(){
         // oled_write_P(led_state.scroll_lock ? PSTR("SCR ") : PSTR("    "), false);
     } else {
 
-#   ifdef BONGO_ENABLE
-        draw_bongo(true);
+#   ifdef INCLUDE_CAT
+        draw_bongo(false);
 #   endif
 
     }

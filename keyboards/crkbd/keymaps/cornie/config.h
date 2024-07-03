@@ -23,16 +23,8 @@
 
 #define SPLIT_WPM_ENABLE
 
-#ifdef OLED_ENABLE
-#   ifdef LAYERS_ENABLE
-#       include "animation/layers.h"
-#   endif
+// graphics ----
+#define INCLUDE_LAYERS
+#define INCLUDE_LOGO
+#define INCLUDE_CAT
 
-#   ifdef BONGO_ENABLE
-#       include "animation/bongo.h"
-#   endif
-
-#   ifdef CORNE_LOGO_ENABLE
-#       include "animation/corne_logo.h"
-#   endif
-#endif
