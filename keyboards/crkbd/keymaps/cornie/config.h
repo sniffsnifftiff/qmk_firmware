@@ -22,16 +22,17 @@
 #define TAPPING_TERM 200
 
 #define SPLIT_WPM_ENABLE
+#define OLED_TIMEOUT 36000
 
 // INFO: graphics ----LEFT----
 #define INCLUDE_LAYERS
 
-#define INCLUDE_LOGO // either logo or luna
-// #define INCLUDE_LUNA //FIX: glitching when oled goes to sleep
+// #define INCLUDE_LOGO // either logo or luna
+#define INCLUDE_LUNA
 
 // INFO: graphics ----RIGHT---- pick one only
 #define INCLUDE_ARASAKA
 // #define INCLUDE_CAT
-// #define INCLUDE_OCEAN //FIX: glitching when oled goes to sleep
+// #define INCLUDE_OCEAN
 
 

@@ -140,9 +140,7 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
     if (is_keyboard_master()) {
         return OLED_ROTATION_270;
     } else {
-#ifdef INCLUDE_ARASAKA
-    return OLED_ROTATION_270;
-#elif defined(INCLUDE_OCEAN)
+#if defined(INCLUDE_ARASAKA) || defined(INCLUDE_OCEAN)
     return OLED_ROTATION_270;
 #else
     return OLED_ROTATION_180;
@@ -153,6 +151,16 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
 
 bool oled_task_user(){
     oled_set_brightness(0);
+
+#if OLED_TIMEOUT > 0
+    /* the animation prevents the normal timeout from occuring */
+    if (last_input_activity_elapsed() > OLED_TIMEOUT && last_led_activity_elapsed() > OLED_TIMEOUT) {
+        return oled_off();
+
+    } else {
+        oled_on();
+    }
+#endif
 
     if (is_keyboard_master()) {
         // oled_clear();

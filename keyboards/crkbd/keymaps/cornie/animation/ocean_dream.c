@@ -12,7 +12,6 @@
 uint8_t    animation_counter       = 0; // global animation counter.
 bool       is_calm                 = false;
 uint32_t   starry_night_anim_timer = 0;
-uint32_t   starry_night_anim_sleep = 0;
 static int current_wpm             = 0;
 
 static uint8_t increment_counter(uint8_t counter, uint8_t max) {
@@ -485,10 +484,10 @@ static void animate_shooting_stars(void) {
  * Calls all different animations at different rates
  */
 void render_stars(void) {
-    //    // animation timer
-    if (timer_elapsed32(starry_night_anim_timer) > STARRY_NIGHT_ANIM_FRAME_DURATION) {
+    void animation_phase(void) {
         starry_night_anim_timer = timer_read32();
         current_wpm             = get_current_wpm();
+
 
 #ifdef ENABLE_ISLAND
         animate_island();
@@ -527,12 +526,10 @@ void render_stars(void) {
 
         animation_counter = increment_counter(animation_counter, NUMBER_OF_FRAMES);
     }
-
-    // this fixes the screen on and off bug
-    if (current_wpm > 0) {
-        oled_on();
-        starry_night_anim_sleep = timer_read32();
-    } else if (timer_elapsed32(starry_night_anim_sleep) > OLED_TIMEOUT) {
-        oled_off();
+// animation timer
+    if (timer_elapsed32(starry_night_anim_timer) > STARRY_NIGHT_ANIM_FRAME_DURATION) {
+        starry_night_anim_timer = timer_read32();
+        current_wpm = get_current_wpm();
+        animation_phase();
     }
 }
