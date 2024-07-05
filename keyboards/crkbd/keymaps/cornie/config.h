@@ -31,8 +31,8 @@
 #define INCLUDE_LUNA
 
 // INFO: graphics ----RIGHT---- pick one only
-#define INCLUDE_ARASAKA
-// #define INCLUDE_CAT
+// #define INCLUDE_ARASAKA
+#define INCLUDE_CAT
 // #define INCLUDE_OCEAN
 
 

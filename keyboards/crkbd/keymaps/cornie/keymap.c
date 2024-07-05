@@ -9,7 +9,7 @@
 #endif
 
 #ifdef INCLUDE_CAT
-#   include "./animation/bongo.h"
+#   include "./animation/bongo.c"
 #endif
 
 #ifdef INCLUDE_OCEAN
@@ -17,7 +17,7 @@
 #endif
 
 #ifdef INCLUDE_ARASAKA
-#   include "./animation/arasaka.h"
+#   include "./animation/arasaka.c"
 #endif
 
 #ifdef INCLUDE_LUNA

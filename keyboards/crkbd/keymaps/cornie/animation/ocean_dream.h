@@ -5,7 +5,7 @@
  * Features:
  * You can turn on and off features in this section
  */
-// #define ENABLE_MOON           // Uses 182 bytes
+#define ENABLE_MOON           // Uses 182 bytes
 #define ENABLE_WAVE           // Uses 844 bytes
 #define ENABLE_SHOOTING_STARS // Uses 872 bytes
 #define ENABLE_ISLAND
@@ -81,6 +81,5 @@ extern bool is_calm;
 
 // timers
 extern uint32_t starry_night_anim_timer;
-extern uint32_t starry_night_anim_sleep;
 
 void render_stars(void);
