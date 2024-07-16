@@ -24,6 +24,10 @@
 #   include "./animation/luna.c"
 #endif
 
+#ifdef INCLUDE_BARS
+#   include "./animation/music-bars.c"
+#endif
+
 enum layers {
     _BASE,
     _FIRST,
@@ -155,15 +159,14 @@ bool oled_task_user(){
 #if OLED_TIMEOUT > 0
     /* the animation prevents the normal timeout from occuring */
     if (last_input_activity_elapsed() > OLED_TIMEOUT && last_led_activity_elapsed() > OLED_TIMEOUT) {
+        // oled_clear();
         return oled_off();
-
     } else {
         oled_on();
     }
 #endif
 
     if (is_keyboard_master()) {
-        // oled_clear();
 
 #   ifdef INCLUDE_LAYERS
         switch (get_highest_layer(layer_state)) {
@@ -212,6 +215,9 @@ bool oled_task_user(){
         arasaka_draw();
 #   endif
 
+#   ifdef INCLUDE_BARS
+        oled_render_anim();
+#   endif
     }
 
     return false;

@@ -2,6 +2,16 @@
 
 #define MASTER_LEFT
 
+#define SPLIT_USB_DETECT
+#define SPLIT_USB_TIMEOUT 5000
+#define SPLIT_WATCHDOG_ENABLE
+
+#define TAPPING_TERM 200
+
+#define SPLIT_WPM_ENABLE
+
+#define OLED_TIMEOUT 36000
+
 #ifdef RGBLIGHT_ENABLE
     #define RGBLIGHT_EFFECT_RAINBOW_SWIRL
     #define RGBLIGHT_EFFECT_BREATHING
@@ -19,11 +29,6 @@
     #define RGBLIGHT_VAL_STEP 17
 #endif
 
-#define TAPPING_TERM 200
-
-#define SPLIT_WPM_ENABLE
-#define OLED_TIMEOUT 36000
-
 // INFO: graphics ----LEFT----
 #define INCLUDE_LAYERS
 
@@ -32,7 +37,8 @@
 
 // INFO: graphics ----RIGHT---- pick one only
 // #define INCLUDE_ARASAKA
-#define INCLUDE_CAT
+// #define INCLUDE_CAT
 // #define INCLUDE_OCEAN
+#define INCLUDE_BARS
 
 
